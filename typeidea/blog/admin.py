@@ -46,7 +46,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 	def queryset(self, request, queryset):
 	    category_id = self.value()
 	    if category_id:
-	    	return queryset.filter(category_id=category_id())
+	        return queryset.filter(category_id=category_id)
 	    return queryset
 
 
@@ -59,7 +59,7 @@ class PostAdmin(BaseOwnerAdmin):
 	]
 	#list_display_links = []
 
-	list_filter = [CategoryOwnerFilter, 'owner', ]
+	list_filter = [CategoryOwnerFilter, 'owner' ]
 	search_fields = ['title', 'category__name']
 
 	actions_on_top = True
