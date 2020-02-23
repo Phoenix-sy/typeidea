@@ -43,6 +43,7 @@ class TagView(IndexView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		tag_id = self.kwargs.get('tag_id')
+		tag = get_object_or_404(Tag, pk=tag_id)
 		context.update({
 			'tag': tag,
 		})
@@ -51,7 +52,7 @@ class TagView(IndexView):
 	def get_queryset(self):
 		'''重写queryset，根据标签过滤'''
 		queryset = super().get_queryset()
-		category_id = self.kwargs.get('tag_id')
+		tag_id = self.kwargs.get('tag_id')
 		return queryset.filter(tag_id=tag_id)
 
 
