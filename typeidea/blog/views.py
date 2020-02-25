@@ -1,9 +1,12 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from config.models import SideBar
 from .models import Post, Tag, Category
+from comment.models import Comment
+
 
 
 class CommonViewMinxin:
@@ -15,11 +18,13 @@ class CommonViewMinxin:
 		context.update(Category.get_navs())
 		return context
 
+
 class IndexView(CommonViewMinxin, ListView):
 	queryset = Post.latest_posts()
 	paginate_by = 5
 	context_object_name = 'post_list'
 	template_name = 'blog/list.html'
+
 
 
 class CategoryView(IndexView):
@@ -32,11 +37,13 @@ class CategoryView(IndexView):
 		})
 		return context
 
+
 	def get_queryset(self):
 		'''重写queryset，根据分类过滤'''
 		queryset = super().get_queryset()
 		category_id = self.kwargs.get('category_id')
 		return queryset.filter(category_id=category_id)
+
 
 
 class TagView(IndexView):
@@ -49,11 +56,13 @@ class TagView(IndexView):
 		})
 		return context
 
+
 	def get_queryset(self):
 		'''重写queryset，根据标签过滤'''
 		queryset = super().get_queryset()
 		tag_id = self.kwargs.get('tag_id')
 		return queryset.filter(tag__id=tag_id)
+
 
 
 class PostDetailView(CommonViewMinxin, DetailView):
@@ -62,6 +71,32 @@ class PostDetailView(CommonViewMinxin, DetailView):
 	context_object_name = 'post'
 	pk_url_kwarg = 'post_id'
 
+
+
+class SearchView(IndexView):
+	def get_context_data(self):
+		context = super().get_context_data()
+		context.update({
+			'keyword': self.request.GET.get('keyword', '')
+		})
+		return context
+
+
+	def get_queryset(self):
+		queryset = super().get_queryset()
+		keyword = self.request.GET.get('keyword')
+		if not keyword:
+			return queryset
+		return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains
+			=keyword))
+
+
+
+class AuthorView(IndexView):
+	def get_queryset(self):
+		queryset = super().get_queryset()
+		author_id = self.kwargs.get('owner_id')
+		return queryset.filter(owner_id=author_id)
 
 '''
 def post_list(request, category_id=None, tag_id=None):
