@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'config',
     'comment',
     
+    'xadmin',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,6 +88,8 @@ DATABASES = {
     }
 }
 
+XADMIN_TITLE = 'Typeidea管理后台'
+XADMIN_FOOTER_TITLE = 'power by phoenix-sy.com'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
