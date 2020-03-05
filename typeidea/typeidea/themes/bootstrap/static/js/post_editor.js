@@ -6,12 +6,12 @@
 		if (is_md) {
 			$content_md.show();
 			$content_ck.hide();
-		}else{
+		} else {
 			$content_md.hide();
 			$content_ck.show();
 		}
 	}
-	$sis_md.on('click', function() {
+	$is_md.on('click', function() {
 		switch_editor($(this).is(':checked'));
 	});
 	switch_editor($is_md.is(':checked'));

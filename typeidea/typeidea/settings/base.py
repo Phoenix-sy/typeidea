@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'blog',
     'config',
     'comment',
+    'rest_framework',
     
     'xadmin',
     'crispy_forms',
@@ -113,6 +114,12 @@ DEFAULT_FILE_STORAGE = 'typeidea.storage.WatermarkStorage'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 CKEDITOR_UPLOAD_PATH = "ariticle_images"
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2,
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

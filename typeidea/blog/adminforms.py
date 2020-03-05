@@ -12,12 +12,12 @@ class PostAdminForm(forms.ModelForm):
 	category = forms.ModelChoiceField(
 		queryset=Category.objects.all(),
 		widget=autocomplete.ModelSelect2(url='category-autocomplete'),
-		label = '分类',
+		label='分类',
 	)
 	tag = forms.ModelMultipleChoiceField(
 		queryset=Tag.objects.all(),
 		widget=autocomplete.ModelSelect2Multiple(url='tag-autocomplete'),
-		label = '标签',
+		label='标签',
 	)
 	content_ck = forms.CharField(widget=CKEditorUploadingWidget(), label='正文', 
 		required=False)
