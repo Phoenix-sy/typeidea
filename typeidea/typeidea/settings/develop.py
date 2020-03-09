@@ -8,3 +8,19 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+INSTALLED_APPS += [
+	'debug_toolbar',
+]
+
+
+MIDDLEWARE += [
+	'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+DEBUG_TOOLBAR_CONFIG = {
+	"JQUERY_URL": '//cdn.bootcss.com/jquery/2.2.4/jquery.min.js',
+}
+
+INTERNAL_IPS = ['127.0.0.1']

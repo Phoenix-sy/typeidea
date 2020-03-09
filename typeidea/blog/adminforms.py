@@ -1,7 +1,7 @@
 from dal import autocomplete
-from django import forms
-from ckeditor.widgets import CKEditorWidget
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+from django import forms
 
 from .models import Category, Tag, Post
 
