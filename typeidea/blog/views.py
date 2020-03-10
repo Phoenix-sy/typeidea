@@ -5,6 +5,7 @@ from django.db.models import Q, F
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
+from silk.profiling.profiler import silk_profile
 
 from config.models import SideBar
 from .models import Post, Tag, Category
@@ -16,11 +17,29 @@ class CommonViewMinxin:
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context.update({
-			'sidebars': SideBar.get_all(),
+			'sidebars': self.get_sidebars(),
 		})
-		context.update(Category.get_navs())
+		context.update(self.get_navs())
 		return context
 
+	def get_sidebars(self):
+		return SideBar.objects.filter(status=SideBar.STATUS_SHOW)
+
+	@silk_profile(name='get_navs')
+	def get_navs(self):
+		categories = Category.objects.filter(status=Category.STATUS_NORMAL)
+		nav_categories = []
+		normal_categories = []
+		for cate in categories:
+			if cate.is_nav:
+				nav_categories.append(cate)
+			else:
+				normal_categories.append(cate)
+
+		return {
+			'navs': nav_categories,
+			'categories': normal_categories,
+		}
 
 class IndexView(CommonViewMinxin, ListView):
 	queryset = Post.latest_posts()

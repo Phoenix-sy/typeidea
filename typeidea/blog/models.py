@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User
 from django.utils.functional import cached_property
 from django.db import models
+
 import mistune
 
 class Category(models.Model):
@@ -24,7 +25,7 @@ class Category(models.Model):
 
 	class Meta:
 		verbose_name = verbose_name_plural = '分类'
-
+'''
 	@classmethod
 	def get_navs(cls):
 		categories = cls.objects.filter(status=cls.STATUS_NORMAL)
@@ -39,7 +40,7 @@ class Category(models.Model):
 		    'navs': nav_categories,
 		    'categories': normal_categories,
 		}
-
+'''
 class Tag(models.Model):
 	STATUS_NORMAL = 1
 	STATUS_DELETE = 0
@@ -91,6 +92,7 @@ class Post(models.Model):
 
 	def __str__(self):
 		return self.title
+		
 	@staticmethod
 	def get_by_tag(tag_id):
 		try:
@@ -116,8 +118,10 @@ class Post(models.Model):
 		return post_list, category
 
 	@classmethod
-	def latest_posts(cls):
+	def latest_posts(cls, with_related=True):
 		queryset = cls.objects.filter(status=cls.STATUS_NORMAL)
+		if with_related:
+			queryset = queryset.select_related('owner', 'category')
 		return queryset
 
 	@classmethod
