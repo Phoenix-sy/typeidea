@@ -18,7 +18,7 @@ setup(
 		'supervisor==4.0.2',
 		'mysqlclient==1.4.6',
 		'django-ckeditor==5.4.0',
-		'djangorestframework==3.8.2',
+		'djangorestframework==3.9.1',
 		'django-redis==4.9.0',
 		'django-autocomplete-light==3.2.10',
 		'mistune==0.8.4',
