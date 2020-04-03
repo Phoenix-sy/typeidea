@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name='typeidea',
-	version='0.1',
+	version='0.4',
 	description='Blog System base on Django',
 	author='thephoenix-sy',
 	author_email='423599771@qq.com',
@@ -13,7 +13,20 @@ setup(
 	package_dir={'': 'typeidea'},
 	include_package_data=True,
 	install_requires=[
-		'django~=1.11',
+		'django==2.0',
+		'gunicorn==19.8.1',
+		'supervisor==4.0.2',
+		'mysqlclient==1.4.6',
+		'django-ckeditor==5.4.0',
+		'djangorestframework==3.8.2',
+		'django-redis==4.9.0',
+		'django-autocomplete-light==3.2.10',
+		'mistune==0.8.4',
+		'Pillow==5.1.0',
+		'coreapi==2.3.3',
+		'hiredis==0.2.0',
+		'django-debug-toolbar==1.9.1',
+		'django-silk==3.0.0',
 	],
 	extras_require={
 		'ipython': ['ipython==6.2.1']
