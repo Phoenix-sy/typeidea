@@ -25,7 +25,7 @@ setup(
 		'Pillow==5.1.0',
 		'coreapi==2.3.3',
 		'hiredis==0.2.0',
-		'django-debug-toolbar==1.9.1',
+		'django-debug-toolbar==1.11.1',
 		'django-silk==3.0.0',
 	],
 	extras_require={
