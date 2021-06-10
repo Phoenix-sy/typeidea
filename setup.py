@@ -13,7 +13,7 @@ setup(
 	package_dir={'': 'typeidea'},
 	include_package_data=True,
 	install_requires=[
-		'django==2.0',
+		'django==2.2.24',
 		'gunicorn==19.8.1',
 		'supervisor==4.0.2',
 		'mysqlclient==1.4.6',
